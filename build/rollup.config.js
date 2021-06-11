@@ -9,7 +9,7 @@ import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
-import css from "rollup-plugin-import-css";
+// import css from "rollup-plugin-import-css";
 import json from '@rollup/plugin-json';
 
 // Get browserslist config and remove ie from es build targets
@@ -107,7 +107,7 @@ if (!argv.format || argv.format === 'es') {
           ],
         ],
       }),
-			css(),
+			// css(),
 			json()
     ],
   };
@@ -138,7 +138,7 @@ if (!argv.format || argv.format === 'cjs') {
       }),
       ...baseConfig.plugins.postVue,
       babel(baseConfig.plugins.babel),
-			css(),
+			// css(),
 			json()
     ],
   };
@@ -168,7 +168,7 @@ if (!argv.format || argv.format === 'iife') {
           ecma: 5,
         },
       }),
-			css(),
+			// css(),
 			json()
     ],
   };
