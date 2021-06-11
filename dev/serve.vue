@@ -1,0 +1,93 @@
+<template>
+  <v-app id="app">
+    <v-app-bar app dark>
+      <v-toolbar-title>
+        <div class="text-h5">
+          ezCode Tiptap Editor <span class="text-caption">v 0.1.0</span>
+        </div>
+      </v-toolbar-title>
+      <v-toolbar-items class="align-center ml-8">
+        <v-switch
+          label="Editable"
+          hide-details
+          v-model="editable"
+          color="primary"
+        ></v-switch>
+        <v-switch
+          label="DarkTheme"
+          hide-details
+          v-model="dark"
+          color="primary"
+          class="ml-2"
+        ></v-switch>
+				<v-btn @click="setContent(originContent)">View Description</v-btn>
+				<v-btn @click="setContent(sampleContent)">View Edit Sample</v-btn>
+      </v-toolbar-items>
+    </v-app-bar>
+    <v-main>
+      <v-container>
+        <ez-tiptap
+          v-model="content"
+          :editable="editable"
+          @uploadImage="uploadImage"
+        />
+        <div v-if="showCode" class="ProseMirror mt-4">
+          <pre class="html"><code >{{content}}</code></pre>
+        </div>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+import Vue from "vue";
+import EzTiptap from "@/ez-tiptap.vue";
+import sample from "./sample.png";
+
+export default Vue.extend({
+  name: "ServeDev",
+  components: {
+    EzTiptap,
+  },
+  data() {
+    return {
+      originContent: `<h1>Hello EzTiptap Editor</h1><p>The editor is based on <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">tiptap 2.0 beta</span>. You need to install <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">vue.js</span> 2 and <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">vuetify</span>.</p><p></p><h3>Install</h3><pre><code class="language-bash language-bash" data-filename="npm or yarn">npm i @ezvue/ez-tiptap
+or
+yarn add @ezvue/ez-tiptap</code></pre><p></p><h3>Register vue component</h3><pre><code class="language-javascript language-javascript" data-filename="Add Component">import Vue from "vue";
+import EzTiptap from "@ezvue/ez-tiptap";
+Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre><code class="language-xml language-xml" data-filename="Markup">&lt;ez-tiptap :editable="true" v-model="contents" @uploadImage="uploadImage"/&gt;</code></pre><ul><li><p><span style="color: rgb(212, 212, 212)">editable : Whether to edit the content</span></p></li><li><p><span style="color: rgb(212, 212, 212)">v-model : Link content to v-model</span></p></li><li><p><span style="color: rgb(212, 212, 212)">@uploadImage : Specifies the function to upload to the server</span></p></li></ul><h4><strong><span style="color: rgb(86, 156, 214)">Image Upload</span></strong></h4><p><span style="color: rgb(212, 212, 212)">The object is passed file, desc and callback function.</span><br><span style="color: rgb(212, 212, 212)">After uploading the file, pass the url of the file as an argument to the callback function.</span></p><pre><code class="language-javascript language-javascript" data-filename="Upload Function Sample">async uploadImage({file, desc, callback}) {
+	const formData = new FormData();
+	formData.append("upFile", file);
+	formData.append("bf_desc", desc);
+	const uploadImageUrl = await this.$axios.post("/api/url",formData);
+	callback(uploadImageUrl);
+}</code></pre><p></p><p>Thank you for using it.</p>`,
+			sampleContent : `<p style="line-height: 100%">sfasfsf<br>sfasfsf<br>sfasfsf<br>sfasfsf<br>sfasfsf<br>sfasfsf</p>`,
+      editable: true,
+      dark: true,
+      showCode: true,
+      content: "",
+    };
+  },
+  watch: {
+    dark() {
+      this.$vuetify.theme.dark = this.dark;
+    },
+  },
+  mounted() {
+    this.setContent(this.originContent);
+  },
+  methods: {
+    setContent(cont) {
+      this.content = cont;
+    },
+    async uploadImage({ file, desc, callback }) {
+      alert(
+        "Upload must be implemented on the server.\nThis is a sample image."
+      );
+      callback(sample);
+    },
+  },
+});
+</script>
+
