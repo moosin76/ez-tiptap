@@ -3,7 +3,7 @@
     <v-app-bar app dark>
       <v-toolbar-title>
         <div class="text-h5">
-          ezCode Tiptap Editor <span class="text-caption">v 0.1.0</span>
+          ezCode Tiptap Editor <span class="text-caption">v 0.1.1</span>
         </div>
       </v-toolbar-title>
       <v-toolbar-items class="align-center ml-8">
@@ -57,6 +57,7 @@ export default Vue.extend({
 or
 yarn add @ezvue/ez-tiptap-editor</code></pre><p></p><h3>Register vue component</h3><pre><code class="language-javascript language-javascript" data-filename="Add Component">import Vue from "vue";
 import EzTiptap from "@ezvue/ez-tiptap-editor";
+import "@ezvue/ez-tiptap-editor/dist/ez-tiptap.min.css";
 Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre><code class="language-xml language-xml" data-filename="Markup">&lt;ez-tiptap :editable="true" v-model="contents" @uploadImage="uploadImage"/&gt;</code></pre><ul><li><p><span style="color: rgb(212, 212, 212)">editable : Whether to edit the content</span></p></li><li><p><span style="color: rgb(212, 212, 212)">v-model : Link content to v-model</span></p></li><li><p><span style="color: rgb(212, 212, 212)">@uploadImage : Specifies the function to upload to the server</span></p></li></ul><h4><strong><span style="color: rgb(86, 156, 214)">Image Upload</span></strong></h4><p><span style="color: rgb(212, 212, 212)">The object is passed file, desc and callback function.</span><br><span style="color: rgb(212, 212, 212)">After uploading the file, pass the url of the file as an argument to the callback function.</span></p><pre><code class="language-javascript language-javascript" data-filename="Upload Function Sample">async uploadImage({file, desc, callback}) {
 	const formData = new FormData();
 	formData.append("upFile", file);
@@ -64,7 +65,7 @@ Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre>
 	const uploadImageUrl = await this.$axios.post("/api/url",formData);
 	callback(uploadImageUrl);
 }</code></pre><p></p><p>Thank you for using it.</p>`,
-			sampleContent : `<p style="line-height: 100%">sfasfsf<br>sfasfsf<br>sfasfsf<br>sfasfsf<br>sfasfsf<br>sfasfsf</p>`,
+			sampleContent : `<p>Samples are being prepared.</p><p style="margin-top: 2em">Feel free to test it.😄</p>`,
       editable: true,
       dark: true,
       showCode: true,

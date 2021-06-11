@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import "./tiptap/css/tiptap.css";
-import "./tiptap/css/tiptap-dark.css";
+// import "./tiptap/css/tiptap.css";
+// import "./tiptap/css/tiptap-dark.css";
 
 import EditTopMenu from "./tiptap/EditTopMenu.vue";
 // import EditBubbleMenu from "./EditBubbleMenu.vue";
