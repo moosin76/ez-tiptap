@@ -51,10 +51,10 @@ export default Vue.extend({
   },
   data() {
     return {
-      originContent: `<h1>Hello EzTiptap Editor</h1><p>The editor is based on <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">tiptap 2.0 beta</span>. You need to install <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">vue.js</span> 2 and <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">vuetify</span>.</p><p></p><h3>Install</h3><pre><code class="language-bash language-bash" data-filename="npm or yarn">npm i @ezvue/ez-tiptap
+      originContent: `<h1>Hello EzTiptap Editor</h1><p>The editor is based on <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">tiptap 2.0 beta</span>. You need to install <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">vue.js</span> 2 and <span style="color: rgb(0, 0, 0); background-color: rgb(187, 222, 251)">vuetify</span>.</p><p></p><h3>Install</h3><pre><code class="language-bash language-bash" data-filename="npm or yarn">npm i @ezvue/ez-tiptap-editor
 or
-yarn add @ezvue/ez-tiptap</code></pre><p></p><h3>Register vue component</h3><pre><code class="language-javascript language-javascript" data-filename="Add Component">import Vue from "vue";
-import EzTiptap from "@ezvue/ez-tiptap";
+yarn add @ezvue/ez-tiptap-editor</code></pre><p></p><h3>Register vue component</h3><pre><code class="language-javascript language-javascript" data-filename="Add Component">import Vue from "vue";
+import EzTiptap from "@ezvue/ez-tiptap-editor";
 Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre><code class="language-xml language-xml" data-filename="Markup">&lt;ez-tiptap :editable="true" v-model="contents" @uploadImage="uploadImage"/&gt;</code></pre><ul><li><p><span style="color: rgb(212, 212, 212)">editable : Whether to edit the content</span></p></li><li><p><span style="color: rgb(212, 212, 212)">v-model : Link content to v-model</span></p></li><li><p><span style="color: rgb(212, 212, 212)">@uploadImage : Specifies the function to upload to the server</span></p></li></ul><h4><strong><span style="color: rgb(86, 156, 214)">Image Upload</span></strong></h4><p><span style="color: rgb(212, 212, 212)">The object is passed file, desc and callback function.</span><br><span style="color: rgb(212, 212, 212)">After uploading the file, pass the url of the file as an argument to the callback function.</span></p><pre><code class="language-javascript language-javascript" data-filename="Upload Function Sample">async uploadImage({file, desc, callback}) {
 	const formData = new FormData();
 	formData.append("upFile", file);

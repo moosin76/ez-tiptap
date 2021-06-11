@@ -5,16 +5,16 @@ The editor is based on tiptap 2.0 beta. You need to install vue.js 2 and vuetify
 
 ### Install
 ```
-npm i @ezvue/ez-tiptap
+npm i @ezvue/ez-tiptap-editor
 ```
 ```
-yarn add @ezvue/ez-tiptap
+yarn add @ezvue/ez-tiptap-editor
 ```
 
 ### Add Component
 ```
 import Vue  from "vue";
-import EzTiptap from "@ezvue/ez-tiptap";
+import EzTiptap from "@ezvue/ez-tiptap-editor";
 Vue.component("EzTiptap", EzTiptap);
 ```
 ### USE Editor
