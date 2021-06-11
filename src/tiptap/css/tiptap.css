@@ -62,7 +62,7 @@
 .ez-edit .ProseMirror .drag-item {position: relative;}
 .ez-edit .ProseMirror .drag-item .drag-handler {position: absolute;width: 1rem;height: 1rem;top: 0;left: -1.75em;cursor: grab; z-index: 2;}
 .ez-edit .ProseMirror .youtube {margin-left: -1.75em; padding-left: 1.75em;}
-.ez-edit .ProseMirror .youtube.drag-item:hover .drag-handler {left:0; background-image: url('./drag-handle.svg');background-repeat: no-repeat;background-size: contain;background-position: center;}
+.ez-edit .ProseMirror .youtube.drag-item:hover .drag-handler {left:0; background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16"><path fill-opacity="0.5" fill="rgb(128,128,128)" d="M4 14c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM2 6C.9 6 0 6.9 0 8s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6C.9 0 0 .9 0 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" /></svg>');background-repeat: no-repeat;background-size: contain;background-position: center;}
 /*Global Drag*/
  .global-drag-handle {position: absolute;}
  .global-drag-handle::after {
@@ -71,10 +71,10 @@
 	width: 1rem;
 	height: 1rem;
 	cursor: grab;
-	background-image: url('./drag-handle.svg');background-repeat: no-repeat;background-size: contain;background-position: center;
+	background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16"><path fill-opacity="0.5" fill="rgb(128,128,128)" d="M4 14c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM2 6C.9 6 0 6.9 0 8s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6C.9 0 0 .9 0 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" /></svg>');background-repeat: no-repeat;background-size: contain;background-position: center;
 }
 /* .ez-edit .ProseMirror .drag-item {margin-left: -1.75rem;} */
-/* .ez-edit .ProseMirror .drag-item .drag-handler {position: absolute;width: 1rem;height: 1rem;top: 0;left: 0;cursor: grab;background-image: url('./drag-handle.svg');background-repeat: no-repeat;background-size: contain;background-position: center;}  */
+/* .ez-edit .ProseMirror .drag-item .drag-handler {position: absolute;width: 1rem;height: 1rem;top: 0;left: 0;cursor: grab;background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16"><path fill-opacity="0.5" fill="rgb(128,128,128)" d="M4 14c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM2 6C.9 6 0 6.9 0 8s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6C.9 0 0 .9 0 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" /></svg>');background-repeat: no-repeat;background-size: contain;background-position: center;}  */
 .ez-edit .emoji .emoji-item .tooltip-padding {padding:0;}
 .v-tabs--vertical>.v-tabs-bar .emoji-tab {transition: background-color 0.4s;height: 40px !important;}
 .v-tabs--vertical>.v-tabs-bar .emoji-tab ~ .emoji-tab {border-top:1px solid #1976d280}

@@ -85958,59 +85958,6 @@ var script = {
 
 };
 
-const isOldIE = typeof navigator !== 'undefined' &&
-    /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-function createInjector(context) {
-    return (id, style) => addStyle(id, style);
-}
-let HEAD;
-const styles = {};
-function addStyle(id, css) {
-    const group = isOldIE ? css.media || 'default' : id;
-    const style = styles[group] || (styles[group] = { ids: new Set(), styles: [] });
-    if (!style.ids.has(id)) {
-        style.ids.add(id);
-        let code = css.source;
-        if (css.map) {
-            // https://developer.chrome.com/devtools/docs/javascript-debugging
-            // this makes source maps inside style tags work properly in Chrome
-            code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
-            // http://stackoverflow.com/a/26603875
-            code +=
-                '\n/*# sourceMappingURL=data:application/json;base64,' +
-                    btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
-                    ' */';
-        }
-        if (!style.element) {
-            style.element = document.createElement('style');
-            style.element.type = 'text/css';
-            if (css.media)
-                style.element.setAttribute('media', css.media);
-            if (HEAD === undefined) {
-                HEAD = document.head || document.getElementsByTagName('head')[0];
-            }
-            HEAD.appendChild(style.element);
-        }
-        if ('styleSheet' in style.element) {
-            style.styles.push(code);
-            style.element.styleSheet.cssText = style.styles
-                .filter(Boolean)
-                .join('\n');
-        }
-        else {
-            const index = style.ids.size - 1;
-            const textNode = document.createTextNode(code);
-            const nodes = style.element.childNodes;
-            if (nodes[index])
-                style.element.removeChild(nodes[index]);
-            if (nodes.length)
-                style.element.insertBefore(textNode, nodes[index]);
-            else
-                style.element.appendChild(textNode);
-        }
-    }
-}
-
 /* script */
 const __vue_script__ = script;
 /* template */
@@ -86042,16 +85989,8 @@ var __vue_render__ = function () {
 var __vue_staticRenderFns__ = [];
 /* style */
 
-const __vue_inject_styles__ = function (inject) {
-  if (!inject) return;
-  inject("data-v-4e9e607a_0", {
-    source: "@import url(https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Brush+Script&family=Nanum+Gothic+Coding:wght@400;700&family=Nanum+Gothic:wght@400;700&family=Nanum+Myeongjo:wght@400;700&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;700&family=Noto+Serif+KR:wght@400;700&family=Song+Myung&family=Roboto+Mono:wght@400;700&display=swap);.v-card__text .ProseMirror{color:#000}.sticky-menu{position:sticky;top:64px;z-index:1}.top.menu{border-bottom:none;background:#fff;padding:4px 8px 8px}.bubble.menu,.top.menu>*{display:flex;flex-direction:row;flex-wrap:wrap}.floating.menu{display:flex;transform:translateY(-100%)}.bubble.menu>*,.top.menu>*>*{margin-top:4px}.bubble.menu{border-radius:5px}.ez-edit .ProseMirror{border:1px solid #dee2e6;padding:1em .5em 1em 2em;outline:0;border-top:none;min-height:300px}.ProseMirror{font-size:1rem}.ProseMirror p::after,.ProseMirror::after{content:\"\";display:table;clear:both}.v-application .ProseMirror>*+*{margin-top:.75em}.ProseMirror ol,.ProseMirror ul{padding-left:2em}.ProseMirror ol,.ProseMirror ul{padding-left:2em}.ProseMirror ul[data-type=taskList]{padding-left:.5em}.ProseMirror .tasklist{position:relative;padding-left:2em}.ProseMirror .tasklist ul[data-type=taskList]{margin-top:.5em}.ProseMirror .tasklist+.tasklist{margin-top:.75em}.ProseMirror .tasklist .tasklist-check{position:absolute;left:0;top:0}.ProseMirror h1,.ProseMirror h2,.ProseMirror h3,.ProseMirror h4,.ProseMirror h5,.ProseMirror h6{line-height:1.1}.ProseMirror p{margin-bottom:0}.ProseMirror code{font-family:'Roboto Mono',monospace;background-color:rgba(0,0,0,.3)!important}.ProseMirror .code-block{border-radius:5px;overflow:hidden}.ProseMirror .code-block .v-btn--fab.v-size--small{height:38px;width:38px}.ProseMirror .code-block .code-block-info{background-color:#f5f5f5}.ProseMirror .code-block-info *{border-radius:0!important;box-shadow:none!important;background-color:#eee!important}.ProseMirror pre{background:#fff;color:#333;font-family:'Roboto Mono',monospace;padding:.75em 1em}.ProseMirror pre code{color:inherit;padding:0;background-color:transparent!important;font-size:1em;user-select:text!important;tab-size:2}.ProseMirror .code-block{position:relative}.ProseMirror .code-block .select{position:absolute;top:.5em;right:-.5em}.ProseMirror img{max-width:100%;height:auto}.ProseMirror img[style*=\"float : left\"]{margin-right:1em}.ProseMirror img[style*=\"float : right\"]{margin-left:1em}.ez-edit .ProseMirror img.ProseMirror-selectednode{outline:3px solid #68cef8}.ProseMirror blockquote{padding-left:1em;border-left:4px solid rgba(120,120,120,.1)}.ProseMirror hr{border:none;border-top:4px solid rgba(120,120,120,.1)}.menu-bg{background-color:#fff}.theme--light.v-system-bar .v-icon{color:inherit}.tiptap-menu-button[aria-expanded=true] i+i{transform:rotate(180deg)}.tiptap-menu-button{position:relative}.tiptap-menu-button .color-block{position:absolute;height:6px;width:60%;bottom:-5px}.ProseMirror table{border-collapse:collapse;table-layout:fixed;width:100%;margin:0;overflow:hidden}.ProseMirror table td,.ProseMirror table th{min-width:1em;border:1px solid #ced4da;padding:3px 5px;vertical-align:top;box-sizing:border-box;position:relative}.ProseMirror table>*{margin-bottom:0}.ProseMirror table th{font-weight:700;text-align:left;background-color:#f1f3f5}.ProseMirror table .selectedCell:after{z-index:2;position:absolute;content:\"\";left:0;right:0;top:0;bottom:0;background:rgba(200,200,255,.1);pointer-events:none}.ProseMirror table .column-resize-handle{position:absolute;right:-2px;top:0;bottom:-2px;width:4px;background-color:#adf;pointer-events:none}.ProseMirror .tableWrapper{overflow-x:auto}.ProseMirror .resize-cursor{cursor:ew-resize;cursor:col-resize}.ez-edit .ProseMirror .drag-item{position:relative}.ez-edit .ProseMirror .drag-item .drag-handler{position:absolute;width:1rem;height:1rem;top:0;left:-1.75em;cursor:grab;z-index:2}.ez-edit .ProseMirror .youtube{margin-left:-1.75em;padding-left:1.75em}.ez-edit .ProseMirror .youtube.drag-item:hover .drag-handler{left:0;background-image:url('data:image/svg+xml;charset=UTF-8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 16\"><path fill-opacity=\"0.5\" fill=\"rgb(128,128,128)\" d=\"M4 14c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM2 6C.9 6 0 6.9 0 8s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6C.9 0 0 .9 0 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z\" /></svg>');background-repeat:no-repeat;background-size:contain;background-position:center}.global-drag-handle{position:absolute}.global-drag-handle::after{content:\"\";display:block;width:1rem;height:1rem;cursor:grab;background-image:url('data:image/svg+xml;charset=UTF-8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 10 16\"><path fill-opacity=\"0.5\" fill=\"rgb(128,128,128)\" d=\"M4 14c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zM2 6C.9 6 0 6.9 0 8s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6C.9 0 0 .9 0 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z\" /></svg>');background-repeat:no-repeat;background-size:contain;background-position:center}.ez-edit .emoji .emoji-item .tooltip-padding{padding:0}.v-tabs--vertical>.v-tabs-bar .emoji-tab{transition:background-color .4s;height:40px!important}.v-tabs--vertical>.v-tabs-bar .emoji-tab~.emoji-tab{border-top:1px solid #1976d280}.v-tabs--vertical>.v-tabs-bar .emoji-tab.v-tab--active{background-color:#1976d220}.custom-color-picker .v-color-picker__color{height:21px;width:21px;margin:2px 3px}.custom-color-picker .v-color-picker__swatches>div{justify-content:left}.custom-color-picker .v-color-picker__swatch{flex-direction:row;margin-bottom:4px}.hljs{color:#24292e;background:#fff}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#d73a49}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#6f42c1}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#005cc5}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#032f62}.hljs-built_in,.hljs-symbol{color:#e36209}.hljs-code,.hljs-comment,.hljs-formula{color:#6a737d}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#22863a}.hljs-subst{color:#24292e}.hljs-section{color:#005cc5;font-weight:700}.hljs-bullet{color:#735c0f}.hljs-emphasis{color:#24292e;font-style:italic}.hljs-strong{color:#24292e;font-weight:700}.hljs-addition{color:#22863a;background-color:#f0fff4}.hljs-deletion{color:#b31d28;background-color:#ffeef0}.theme--dark .ProseMirror-gapcursor:after{border-color:#fff}.theme--dark .v-card__text .ProseMirror{color:#fff}.theme--dark .top.menu{background-color:#4a4a4a}.theme--dark .bubble-menu,.theme--dark .top-menu>*{background:#000}.theme--dark .ez-edit .ProseMirror{background-color:#1e1e1e;border:none}.theme--dark .ProseMirror .code-block-info{background-color:#121212}.theme--dark .ProseMirror .code-block-info *{background-color:#121212!important}.theme--dark .ProseMirror pre{background-color:#333;color:#fff}.theme--dark .menu-bg{background-color:#000}.theme--dark .ProseMirror table td,.theme--dark .ProseMirror table th{border-color:#333}.theme--dark .ProseMirror table th{background-color:#121212}.theme--dark .hljs{color:#c9d1d9;background:#0d1117}.theme--dark .hljs-doctag,.theme--dark .hljs-keyword,.theme--dark .hljs-meta .hljs-keyword,.theme--dark .hljs-template-tag,.theme--dark .hljs-template-variable,.theme--dark .hljs-type,.theme--dark .hljs-variable.language_{color:#ff7b72}.theme--dark .hljs-title,.theme--dark .hljs-title.class_,.theme--dark .hljs-title.class_.inherited__,.theme--dark .hljs-title.function_{color:#d2a8ff}.theme--dark .hljs-attr,.theme--dark .hljs-attribute,.theme--dark .hljs-literal,.theme--dark .hljs-meta,.theme--dark .hljs-number,.theme--dark .hljs-operator,.theme--dark .hljs-selector-attr,.theme--dark .hljs-selector-class,.theme--dark .hljs-selector-id,.theme--dark .hljs-variable{color:#79c0ff}.theme--dark .hljs-meta .hljs-string,.theme--dark .hljs-regexp,.theme--dark .hljs-string{color:#a5d6ff}.theme--dark .hljs-built_in,.theme--dark .hljs-symbol{color:#ffa657}.theme--dark .hljs-code,.theme--dark .hljs-comment,.theme--dark .hljs-formula{color:#8b949e}.theme--dark .hljs-name,.theme--dark .hljs-quote,.theme--dark .hljs-selector-pseudo,.theme--dark .hljs-selector-tag{color:#7ee787}.theme--dark .hljs-subst{color:#c9d1d9}.theme--dark .hljs-section{color:#1f6feb;font-weight:700}.theme--dark .hljs-bullet{color:#f2cc60}.theme--dark .hljs-emphasis{color:#c9d1d9;font-style:italic}.theme--dark .hljs-strong{color:#c9d1d9;font-weight:700}.theme--dark .hljs-addition{color:#aff5b4;background-color:#033a16}.theme--dark .hljs-deletion{color:#ffdcd7;background-color:#67060c}",
-    map: undefined,
-    media: undefined
-  });
-};
+const __vue_inject_styles__ = undefined;
 /* scoped */
-
 
 const __vue_scope_id__ = undefined;
 /* module identifier */
@@ -86060,6 +85999,8 @@ const __vue_module_identifier__ = undefined;
 /* functional template */
 
 const __vue_is_functional_template__ = false;
+/* style inject */
+
 /* style inject SSR */
 
 /* style inject shadow dom */
@@ -86067,7 +86008,7 @@ const __vue_is_functional_template__ = false;
 const __vue_component__ = /*#__PURE__*/normalizeComponent({
   render: __vue_render__,
   staticRenderFns: __vue_staticRenderFns__
-}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, createInjector, undefined, undefined);
+}, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);
 
 // Import vue component
 // IIFE injects install function into component, allowing component

@@ -10,7 +10,13 @@ import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
 // import css from "rollup-plugin-import-css";
+// import cssbundle from 'rollup-plugin-css-bundle';
 import json from '@rollup/plugin-json';
+
+import postcss from 'rollup-plugin-postcss';
+import cssimport from 'postcss-import';
+import autoprefixer from 'autoprefixer';
+
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs.readFileSync('./.browserslistrc')
@@ -53,6 +59,13 @@ const baseConfig = {
         extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
       }),
       commonjs(),
+			json(),
+			postcss({
+				plugins:[
+					cssimport(),
+					autoprefixer(),
+				]
+			}),
     ],
     babel: {
       exclude: 'node_modules/**',
@@ -108,7 +121,11 @@ if (!argv.format || argv.format === 'es') {
         ],
       }),
 			// css(),
-			json()
+			// cssbundle({
+      //       transform: code => postcss([autoprefixer]).process(code, {})
+      //   }),
+			
+		
     ],
   };
   buildFormats.push(esConfig);
@@ -138,8 +155,6 @@ if (!argv.format || argv.format === 'cjs') {
       }),
       ...baseConfig.plugins.postVue,
       babel(baseConfig.plugins.babel),
-			// css(),
-			json()
     ],
   };
   buildFormats.push(umdConfig);
@@ -168,8 +183,6 @@ if (!argv.format || argv.format === 'iife') {
           ecma: 5,
         },
       }),
-			// css(),
-			json()
     ],
   };
   buildFormats.push(unpkgConfig);

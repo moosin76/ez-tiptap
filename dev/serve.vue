@@ -43,6 +43,8 @@
 import Vue from "vue";
 import EzTiptap from "@/ez-tiptap.vue";
 import sample from "./sample.png";
+import "../src/tiptap/css/tiptap.css";
+import "../src/tiptap/css/tiptap-dark.css";
 
 export default Vue.extend({
   name: "ServeDev",
@@ -75,6 +77,7 @@ Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre>
     },
   },
   mounted() {
+		document.title = "ezCode Tiptap Editor";
     this.setContent(this.originContent);
   },
   methods: {
