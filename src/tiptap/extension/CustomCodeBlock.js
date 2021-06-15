@@ -36,6 +36,19 @@ const CustomCodeBlock = TiptapCodeBlock.extend({
 						'data-filename' : attributes.filename
 					}
 				}
+			},
+			fold : {
+				default : null,
+				parseHTML : element => {
+					const fold = element.firstElementChild?.getAttribute('data-fold');
+					return {fold}
+				},
+				renderHTML : attributes => {
+					if(!attributes.fold) return {};
+					return {
+						'data-fold' : attributes.fold
+					}
+				}
 			}
 		}
 	},

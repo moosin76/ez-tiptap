@@ -7,19 +7,35 @@
       contenteditable="false"
     ></div>
     <div class="code-block elevation-4">
+			
       <div class="code-block-info d-flex">
-        
-          <v-text-field
-            v-model="filename"
-            dense
-            hide-details
-            solo
-            :clearable="editor.options.editable"
-            :label="editor.options.editable ? 'Code description' : ''"
-            :readonly="!editor.options.editable"
-          ></v-text-field>
-        
-        <div style="max-width:240px">
+				<v-tooltip top>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-on="on"
+              v-bind="attrs"
+              fab
+              small
+              tile
+              elevation="0"
+              @click="toggleShow"
+            >
+              <v-icon>{{`mdi-eye${codeShow ? '' : '-off'}-outline` }}</v-icon>
+            </v-btn>
+          </template>
+          <span>{{codeShow ? "Show" : "Hide"}} code</span>
+        </v-tooltip>
+        <v-text-field
+          v-model="filename"
+          dense
+          hide-details
+          solo
+          :clearable="editor.options.editable"
+          :label="editor.options.editable ? 'Code description' : ''"
+          :readonly="!editor.options.editable"
+        ></v-text-field>
+
+        <div style="max-width: 240px">
           <v-autocomplete
             v-if="editor.options.editable"
             v-model="lang"
@@ -74,8 +90,13 @@
           </template>
           <span>삭제</span>
         </v-tooltip>
+        
       </div>
-      <pre><node-view-content as="code" /></pre>
+			<v-expand-transition>
+				<div v-show="!codeShow">
+      		<pre ><node-view-content as="code" /></pre>
+				</div>
+			</v-expand-transition>
     </div>
   </node-view-wrapper>
 </template>
@@ -92,8 +113,10 @@ export default {
   },
   data() {
     return {
-      lang: '',
+			codeShow : this.node.attrs.fold,
+      lang: "",
       languages: this.extension.options.lowlight.listLanguages(),
+      
     };
   },
   watch: {
@@ -118,6 +141,14 @@ export default {
         this.updateAttributes({ filename });
       },
     },
+    fold: {
+      get() {
+        return this.node.attrs.fold;
+      },
+      set(fold) {
+        this.updateAttributes({ fold });
+      },
+    },
   },
   mounted() {
     const { language } = this.node.attrs;
@@ -137,6 +168,11 @@ export default {
     },
     clearCodeblock() {
       this.editor.chain().focus().toggleCodeBlock().run();
+    },
+    toggleShow() {
+			this.codeShow = !this.codeShow;
+			if(this.editor.isEditable)
+       	this.fold = this.codeShow;
     },
   },
 };

@@ -38375,7 +38375,8 @@ var script$2 = {
 
   data() {
     return {
-      lang: '',
+      codeShow: this.node.attrs.fold,
+      lang: "",
       languages: this.extension.options.lowlight.listLanguages()
     };
   },
@@ -38410,6 +38411,18 @@ var script$2 = {
         });
       }
 
+    },
+    fold: {
+      get() {
+        return this.node.attrs.fold;
+      },
+
+      set(fold) {
+        this.updateAttributes({
+          fold
+        });
+      }
+
     }
   },
 
@@ -38436,6 +38449,11 @@ var script$2 = {
 
     clearCodeblock() {
       this.editor.chain().focus().toggleCodeBlock().run();
+    },
+
+    toggleShow() {
+      this.codeShow = !this.codeShow;
+      if (this.editor.isEditable) this.fold = this.codeShow;
     }
 
   }
@@ -38468,7 +38486,29 @@ var __vue_render__$2 = function () {
     staticClass: "code-block elevation-4"
   }, [_c('div', {
     staticClass: "code-block-info d-flex"
-  }, [_c('v-text-field', {
+  }, [_c('v-tooltip', {
+    attrs: {
+      "top": ""
+    },
+    scopedSlots: _vm._u([{
+      key: "activator",
+      fn: function (ref) {
+        var on = ref.on;
+        var attrs = ref.attrs;
+        return [_c('v-btn', _vm._g(_vm._b({
+          attrs: {
+            "fab": "",
+            "small": "",
+            "tile": "",
+            "elevation": "0"
+          },
+          on: {
+            "click": _vm.toggleShow
+          }
+        }, 'v-btn', attrs, false), on), [_c('v-icon', [_vm._v(_vm._s("mdi-eye" + (_vm.codeShow ? '' : '-off') + "-outline"))])], 1)];
+      }
+    }])
+  }, [_vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.codeShow ? "Show" : "Hide") + " code")])]), _vm._v(" "), _c('v-text-field', {
     attrs: {
       "dense": "",
       "hide-details": "",
@@ -38558,11 +38598,18 @@ var __vue_render__$2 = function () {
         }, 'v-btn', attrs, false), on), [_c('v-icon', [_vm._v("mdi-delete")])], 1)];
       }
     }], null, false, 4110704896)
-  }, [_vm._v(" "), _c('span', [_vm._v("삭제")])]) : _vm._e()], 1), _vm._v(" "), _c('pre', [_c('node-view-content', {
+  }, [_vm._v(" "), _c('span', [_vm._v("삭제")])]) : _vm._e()], 1), _vm._v(" "), _c('v-expand-transition', [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: !_vm.codeShow,
+      expression: "!codeShow"
+    }]
+  }, [_c('pre', [_c('node-view-content', {
     attrs: {
       "as": "code"
     }
-  })], 1)])]);
+  })], 1)])])], 1)]);
 };
 
 var __vue_staticRenderFns__$2 = [];
@@ -84668,6 +84715,23 @@ const CustomCodeBlock = CodeBlockLowlight.extend({
             'data-filename': attributes.filename
           };
         }
+      },
+      fold: {
+        default: null,
+        parseHTML: element => {
+          var _element$firstElement2;
+
+          const fold = (_element$firstElement2 = element.firstElementChild) === null || _element$firstElement2 === void 0 ? void 0 : _element$firstElement2.getAttribute('data-fold');
+          return {
+            fold
+          };
+        },
+        renderHTML: attributes => {
+          if (!attributes.fold) return {};
+          return {
+            'data-fold': attributes.fold
+          };
+        }
       }
     };
   },
@@ -85661,7 +85725,7 @@ var GlobalDragHandle = Extension.create({
             }
 
             dropTimer = setTimeout(() => {
-              dropElement.style.display = 'none';
+              if (dropElement) dropElement.style.display = 'none';
             }, 3000);
             const coords = {
               left: event.clientX + WIDTH + 50,

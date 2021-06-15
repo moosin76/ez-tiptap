@@ -134,7 +134,8 @@ export default Extension.create({
 								clearTimeout(dropTimer)
 							}
 							dropTimer = setTimeout(()=>{
-								dropElement.style.display = 'none'
+								if(dropElement)
+									dropElement.style.display = 'none'
 							}, 3000)
 
               const coords = {

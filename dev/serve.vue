@@ -3,7 +3,7 @@
     <v-app-bar app dark>
       <v-toolbar-title>
         <div class="text-h5">
-          ezCode Tiptap Editor <span class="text-caption">v 0.1.1</span>
+          ezCode Tiptap Editor <span class="text-caption">v 0.1.2</span>
         </div>
       </v-toolbar-title>
       <v-toolbar-items class="align-center ml-8">
@@ -20,8 +20,8 @@
           color="primary"
           class="ml-2"
         ></v-switch>
-				<v-btn @click="setContent(originContent)">View Description</v-btn>
-				<v-btn @click="setContent(sampleContent)">View Edit Sample</v-btn>
+        <v-btn @click="setContent(originContent)">View Description</v-btn>
+        <v-btn @click="setContent(sampleContent)">View Edit Sample</v-btn>
       </v-toolbar-items>
     </v-app-bar>
     <v-main>
@@ -31,8 +31,9 @@
           :editable="editable"
           @uploadImage="uploadImage"
         />
-        <div v-if="showCode" class="ProseMirror mt-4">
-          <pre class="html"><code >{{content}}</code></pre>
+        <div v-if="codeShow" class="ProseMirror mt-4">
+            <pre v-highlightjs="content"><code class="xml"></code></pre>
+						<!-- <pre><code>{{contentBreak}}</code></pre> -->
         </div>
       </v-container>
     </v-main>
@@ -58,17 +59,16 @@ or
 yarn add @ezvue/ez-tiptap-editor</code></pre><p></p><h3>Register vue component</h3><pre><code class="language-javascript language-javascript" data-filename="Add Component">import Vue from "vue";
 import EzTiptap from "@ezvue/ez-tiptap-editor";
 import "@ezvue/ez-tiptap-editor/dist/ez-tiptap.min.css";
-Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre><code class="language-xml language-xml" data-filename="Markup">&lt;ez-tiptap :editable="true" v-model="contents" @uploadImage="uploadImage"/&gt;</code></pre><ul><li><p><span style="color: rgb(212, 212, 212)">editable : Whether to edit the content</span></p></li><li><p><span style="color: rgb(212, 212, 212)">v-model : Link content to v-model</span></p></li><li><p><span style="color: rgb(212, 212, 212)">@uploadImage : Specifies the function to upload to the server</span></p></li></ul><h4><strong><span style="color: rgb(86, 156, 214)">Image Upload</span></strong></h4><p><span style="color: rgb(212, 212, 212)">The object is passed file, desc and callback function.</span><br><span style="color: rgb(212, 212, 212)">After uploading the file, pass the url of the file as an argument to the callback function.</span></p><pre><code class="language-javascript language-javascript" data-filename="Upload Function Sample">async uploadImage({file, desc, callback}) {
+Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre><code class="language-xml language-xml" data-filename="Markup">&lt;ez-tiptap :editable="true" v-model="contents" @uploadImage="uploadImage"/&gt;</code></pre><ul><li><p>editable : Whether to edit the content</p></li><li><p>v-model : Link content to v-model</p></li><li><p>@uploadImage : Specifies the function to upload to the server</p></li></ul><h4><strong><span style="color: rgb(86, 156, 214)">Image Upload</span></strong></h4><p>The object is passed file, desc and callback function.<br>After uploading the file, pass the url of the file as an argument to the callback function.</p><pre><code class="language-javascript language-javascript" data-filename="Upload Function Sample">async uploadImage({file, desc, callback}) {
 	const formData = new FormData();
 	formData.append("upFile", file);
 	formData.append("bf_desc", desc);
 	const uploadImageUrl = await this.$axios.post("/api/url",formData);
 	callback(uploadImageUrl);
-}</code></pre><p></p><p>Thank you for using it.</p>`,
-			sampleContent : `<p>Samples are being prepared.</p><p style="margin-top: 2em">Feel free to test it.😄</p>`,
+}</code></pre><p></p><p>Thank you for using it.</p><hr><p>version history</p><ul><li><p>v 0.1.2 : Added function to show/hide code in code block</p></li><li><p>v 0.1.1 : Show keyboard shortcuts in menu</p></li></ul>`,
       editable: true,
       dark: true,
-      showCode: true,
+      codeShow: true,
       content: "",
     };
   },
@@ -78,11 +78,11 @@ Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre>
     },
   },
   mounted() {
-		document.title = "ezCode Tiptap Editor";
+    document.title = "ezCode Tiptap Editor";
     this.setContent(this.originContent);
   },
   methods: {
-    setContent(cont) {
+    async setContent(cont) {
       this.content = cont;
     },
     async uploadImage({ file, desc, callback }) {
