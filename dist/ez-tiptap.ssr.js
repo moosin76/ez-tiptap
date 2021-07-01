@@ -85397,7 +85397,9 @@ var script = {
           defaultOptions: _objectSpread2(_objectSpread2({}, CustomLink.options), {}, {
             openOnClick: !this.editable
           })
-        }), CustomCodeBlock, CustomYoutube, TextColor, TextStyle, FontFamily, FontSize, BackgroundColor, Image, LineHeight, TextDecoration, MarginTop, GlobalDragHandle],
+        }), CustomCodeBlock.extend({
+          draggable: this.editable
+        }), CustomYoutube, TextColor, TextStyle, FontFamily, FontSize, BackgroundColor, Image, LineHeight, TextDecoration, MarginTop, GlobalDragHandle],
         content: this.value,
         onUpdate: function onUpdate() {
           _this2.$emit("input", _this2.editor.getHTML());
@@ -85454,7 +85456,7 @@ var __vue_inject_styles__ = undefined;
 var __vue_scope_id__ = undefined;
 /* module identifier */
 
-var __vue_module_identifier__ = "data-v-0834a5c2";
+var __vue_module_identifier__ = "data-v-0ed1ecac";
 /* functional template */
 
 var __vue_is_functional_template__ = false;

@@ -138,7 +138,9 @@ export default {
               openOnClick: !this.editable,
             },
           }),
-          CustomCodeBlock,
+          CustomCodeBlock.extend({
+						draggable : this.editable,
+					}),
           CustomYoutube,
           TextColor,
           TextStyle,

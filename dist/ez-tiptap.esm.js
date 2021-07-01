@@ -85996,7 +85996,9 @@ var script = {
           defaultOptions: { ...CustomLink.options,
             openOnClick: !this.editable
           }
-        }), CustomCodeBlock, CustomYoutube, TextColor, TextStyle, FontFamily, FontSize, BackgroundColor, Image, LineHeight, TextDecoration, MarginTop, GlobalDragHandle],
+        }), CustomCodeBlock.extend({
+          draggable: this.editable
+        }), CustomYoutube, TextColor, TextStyle, FontFamily, FontSize, BackgroundColor, Image, LineHeight, TextDecoration, MarginTop, GlobalDragHandle],
         content: this.value,
         onUpdate: () => {
           this.$emit("input", this.editor.getHTML());

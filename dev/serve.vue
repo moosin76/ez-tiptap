@@ -3,7 +3,7 @@
     <v-app-bar app dark>
       <v-toolbar-title>
         <div class="text-h5">
-          ezCode Tiptap Editor <span class="text-caption">v 0.1.2</span>
+          ezCode Tiptap Editor <span class="text-caption">v 0.1.3</span>
         </div>
       </v-toolbar-title>
       <v-toolbar-items class="align-center ml-8">
@@ -65,7 +65,7 @@ Vue.component("EzTiptap", EzTiptap);</code></pre><p></p><h3>USE Editor</h3><pre>
 	formData.append("bf_desc", desc);
 	const uploadImageUrl = await this.$axios.post("/api/url",formData);
 	callback(uploadImageUrl);
-}</code></pre><p></p><p>Thank you for using it.</p><hr><p>version history</p><ul><li><p>v 0.1.2 : Added function to show/hide code in code block</p></li><li><p>v 0.1.1 : Show keyboard shortcuts in menu</p></li></ul>`,
+}</code></pre><p></p><p>Thank you for using it.</p><hr><p>version history</p><ul><li><p>v 0.1.3 : Fixed an issue where code blocks could not be dragged in view mode</p></li><li><p>v 0.1.2 : Added function to show/hide code in code block</p></li><li><p>v 0.1.1 : Show keyboard shortcuts in menu</p></li></ul>`,
       editable: true,
       dark: true,
       codeShow: true,
