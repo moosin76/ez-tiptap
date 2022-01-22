@@ -52,7 +52,7 @@ const CustomLink = Mark.create({
 	},
 	addPasteRules() {
 		return [
-			markPasteRule(pasteRegex, this.type, match => ({ href: match[0] })),
+			markPasteRule({find: pasteRegex, type: this.type, getAttributes: match => ({href: match[0]})})
 		]
 	},
 	addProseMirrorPlugins() {

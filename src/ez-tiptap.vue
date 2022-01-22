@@ -126,14 +126,14 @@ export default {
           TaskList,
           TaskItem,
           Dropcursor.extend({
-            defaultOptions: {
+            addOptions: {
               ...Dropcursor.options,
               color: "red",
               width: 3,
             },
           }),
           CustomLink.extend({
-            defaultOptions: {
+            addOptions: {
               ...CustomLink.options,
               openOnClick: !this.editable,
             },
